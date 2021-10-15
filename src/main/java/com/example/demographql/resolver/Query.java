@@ -11,13 +11,18 @@ import org.springframework.stereotype.Component;
 public class Query implements GraphQLQueryResolver {
 
     @Autowired
-    private DogRepository dogRepository;
+    private final DogRepository dogRepository;
+
+    public Query(DogRepository dogRepository) {
+        this.dogRepository = dogRepository;
+    }
 
     public Iterable<Dog> findAllDogs() {
         return dogRepository.findAll();
     }
 
-    public Optional<Dog> findDogById(Long id) {
-        return dogRepository.findById(id);
+    public Dog findDogById(Long id) {
+        Optional<Dog> optionalDog = dogRepository.findById(id);
+        return optionalDog.orElseThrow(() -> new DogNotFoundException(id));
     }
 }
