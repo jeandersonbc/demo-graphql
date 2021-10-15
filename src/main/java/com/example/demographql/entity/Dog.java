@@ -19,13 +19,6 @@ public class Dog {
 
     private String breed;
 
-    public Dog(Long id, String name, String origin, String breed) {
-        this.id = id;
-        this.name = name;
-        this.origin = origin;
-        this.breed = breed;
-    }
-
     public Long getId() {
         return id;
     }
